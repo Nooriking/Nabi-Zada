@@ -21,18 +21,14 @@
       rel="stylesheet"
     />
     <style>
-      /* ===== پالت ۳ رنگی ===== */
       :root {
         --navy: #0a2540;
         --blue: #1a73e8;
         --sky: #e8f0fe;
         --white: #ffffff;
-
-        /* رنگ برندها (فقط برای آیکون‌ها) */
         --wa: #25d366;
         --fb: #1877f2;
         --yt: #ff0000;
-
         --text: var(--navy);
         --muted: rgba(10, 37, 64, 0.62);
         --line: rgba(26, 115, 232, 0.22);
@@ -65,54 +61,60 @@
         overflow-x: hidden;
       }
 
-      @media (hover: hover) and (pointer: fine) {
-        body.custom-cursor,
-        body.custom-cursor * {
-          cursor: none !important;
-        }
-        .cursor-dot,
-        .cursor-ring {
-          position: fixed;
-          top: 0;
-          left: 0;
-          pointer-events: none;
-          border-radius: 50%;
-          z-index: 9999;
-          transform: translate(-50%, -50%);
-          will-change: transform;
-        }
-        .cursor-dot {
-          width: 8px;
-          height: 8px;
-          background: var(--navy);
-          box-shadow: 0 0 12px rgba(26, 115, 232, 0.55);
-          transition:
-            width 0.18s ease,
-            height 0.18s ease,
-            background 0.18s ease;
-        }
-        .cursor-ring {
-          width: 34px;
-          height: 34px;
-          border: 1.5px solid rgba(26, 115, 232, 0.55);
-          background: rgba(232, 240, 254, 0.55);
-          transition:
-            width 0.25s ease,
-            height 0.25s ease,
-            border-color 0.25s ease,
-            background 0.25s ease;
-        }
-        body.cursor-hover .cursor-dot {
-          width: 14px;
-          height: 14px;
-          background: var(--blue);
-        }
-        body.cursor-hover .cursor-ring {
-          width: 52px;
-          height: 52px;
-          border-color: var(--navy);
-          background: rgba(26, 115, 232, 0.14);
-        }
+      .cursor-dot,
+      .cursor-ring {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        border-radius: 50%;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        will-change: transform;
+        opacity: 0;
+        display: none;
+      }
+      body.custom-cursor .cursor-dot,
+      body.custom-cursor .cursor-ring {
+        display: block;
+        opacity: 1;
+      }
+      body.custom-cursor,
+      body.custom-cursor * {
+        cursor: none !important;
+      }
+
+      .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--navy);
+        box-shadow: 0 0 12px rgba(26, 115, 232, 0.55);
+        transition:
+          width 0.18s ease,
+          height 0.18s ease,
+          background 0.18s ease;
+      }
+      .cursor-ring {
+        width: 34px;
+        height: 34px;
+        border: 1.5px solid rgba(26, 115, 232, 0.55);
+        background: rgba(232, 240, 254, 0.55);
+        transition:
+          width 0.25s ease,
+          height 0.25s ease,
+          border-color 0.25s ease,
+          background 0.25s ease;
+      }
+      body.cursor-hover .cursor-dot {
+        width: 14px;
+        height: 14px;
+        background: var(--blue);
+      }
+      body.cursor-hover .cursor-ring {
+        width: 52px;
+        height: 52px;
+        border-color: var(--navy);
+        background: rgba(26, 115, 232, 0.14);
       }
 
       .orbs {
@@ -221,6 +223,9 @@
       }
       .reveal.d7 {
         animation-delay: 0.65s;
+      }
+      .reveal.d8 {
+        animation-delay: 0.75s;
       }
       @keyframes fadeUp {
         to {
@@ -355,6 +360,7 @@
         color: var(--muted);
       }
 
+      /* ====== دکمه‌های بالا: فقط 2 دکمه ====== */
       .actions {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -369,8 +375,10 @@
         gap: 8px;
         border-radius: 16px;
         text-decoration: none;
+        font-family: inherit;
         font-size: 14px;
         font-weight: 700;
+        border: none;
         position: relative;
         overflow: hidden;
         isolation: isolate;
@@ -378,6 +386,7 @@
           transform 0.2s ease,
           box-shadow 0.3s ease,
           background 0.3s ease;
+        cursor: pointer;
       }
       .btn::before {
         content: "";
@@ -421,19 +430,6 @@
         background: var(--navy);
         box-shadow: 0 14px 28px -10px rgba(10, 37, 64, 0.7);
       }
-      .btn-ghost {
-        background: var(--white);
-        color: var(--blue);
-        border: 1px solid var(--blue);
-      }
-      .btn-ghost:hover {
-        background: var(--sky);
-        color: var(--navy);
-        border-color: var(--navy);
-      }
-      .btn-wide {
-        grid-column: 1 / -1;
-      }
       .btn:active {
         transform: scale(0.965);
       }
@@ -456,6 +452,11 @@
         50% {
           box-shadow: 0 0 0 8px rgba(26, 115, 232, 0);
         }
+      }
+      .btn-save.saved {
+        background: #1a9e4a;
+        border-color: #1a9e4a;
+        animation: none;
       }
 
       .phone-num {
@@ -550,15 +551,12 @@
         flex-shrink: 0;
         font-size: 18px;
         color: var(--white);
-        transition:
-          transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-          box-shadow 0.3s ease;
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       }
       .link:hover .icon {
         transform: rotate(-10deg) scale(1.1);
       }
 
-      /* ====== رنگ برند هر آیکون ====== */
       .ig .icon {
         background: linear-gradient(
           45deg,
@@ -582,6 +580,10 @@
         background: var(--wa);
         box-shadow: 0 4px 12px -4px rgba(37, 211, 102, 0.5);
       }
+      .em .icon {
+        background: linear-gradient(135deg, var(--blue), var(--navy));
+        box-shadow: 0 4px 12px -4px rgba(26, 115, 232, 0.5);
+      }
 
       .meta {
         flex: 1;
@@ -599,12 +601,23 @@
         font-size: 11.5px;
         font-weight: 500;
         color: var(--muted);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
       .handle {
         font-family: "Inter", sans-serif;
         direction: ltr;
-        text-align: right;
+        text-align: left;
         unicode-bidi: isolate;
+      }
+      /* ایمیل: خط بشکند تا کامل دیده شود */
+      .em .meta small {
+        white-space: normal;
+        word-break: break-all;
+        overflow: visible;
+        text-overflow: clip;
+        font-size: 11px;
       }
 
       .chev {
@@ -688,7 +701,7 @@
     <main class="phone">
       <header class="brand">
         <div class="logo reveal d1">
-          <img src="347A4321.JPG.jpg" alt="خیام نبی زاده" />
+          <img src="347A4321.JPG.webp" alt="خیام نبی زاده" />
         </div>
         <h1 class="reveal d2">خیام نبی زاده</h1>
         <p class="en reveal d2">Khiam Nabizada</p>
@@ -696,35 +709,51 @@
         <p class="quote reveal d3">ارتباط، اعتماد، همراهی.</p>
       </header>
 
+      <!-- دکمه‌های اصلی: تماس + ذخیره مخاطب -->
       <div class="actions reveal d4">
         <a class="btn btn-blue" href="tel:+93786131213">
           <i class="fa-solid fa-phone"></i>
           <span>تماس</span>
         </a>
+        <button type="button" id="saveContactBtn" class="btn btn-save">
+          <i class="fa-solid fa-address-card"></i>
+          <span id="saveContactLabel">ذخیره مخاطب</span>
+        </button>
+      </div>
+      <p class="phone-num reveal d5">078 613 1213</p>
+
+      <!-- اطلاعات تماس: ایمیل + واتساپ (هر کدام یک بار) -->
+      <p class="section-title reveal d5">اطلاعات تماس</p>
+      <nav class="links">
+        <a class="link em reveal d5" href="mailto:tdp.ahmadkhiam@gmail.com">
+          <div class="icon"><i class="fa-solid fa-envelope"></i></div>
+          <div class="meta">
+            <strong>ایمیل</strong>
+            <small class="handle">tdp.ahmadkhiam@gmail.com</small>
+          </div>
+          <div class="chev"><i class="fa-solid fa-chevron-left"></i></div>
+        </a>
+
         <a
-          class="btn btn-ghost"
+          class="link wa reveal d6"
           href="https://wa.me/93786131213"
           target="_blank"
           rel="noopener"
         >
-          <i class="fa-brands fa-whatsapp"></i>
-          <span>واتساپ</span>
+          <div class="icon"><i class="fa-brands fa-whatsapp"></i></div>
+          <div class="meta">
+            <strong>واتساپ</strong>
+            <small>پیام مستقیم</small>
+          </div>
+          <div class="chev"><i class="fa-solid fa-chevron-left"></i></div>
         </a>
-        <a
-          class="btn btn-save btn-wide"
-          href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3AKhiam%20Nabizada%0AN%3ANabizada%3BKhiam%3B%3B%3B%0ATEL%3BTYPE%3DCELL%3A%2B93786131213%0AURL%3Ahttps%3A%2F%2Fwww.instagram.com%2Fkhiamnabizada%0AURL%3Ahttps%3A%2F%2Fwww.facebook.com%2Fahmadkhiam.nabizadanabizada%0AURL%3Ahttps%3A%2F%2Fyoutube.com%2F%40laughstore%0AEND%3AVCARD"
-          download="Khiam-Nabizada.vcf"
-        >
-          <i class="fa-solid fa-address-card"></i>
-          <span>ذخیره مخاطب / Add Contact</span>
-        </a>
-      </div>
-      <p class="phone-num reveal d5">078 613 1213</p>
+      </nav>
 
-      <p class="section-title reveal d5">شبکه‌های اجتماعی</p>
+      <!-- شبکه‌های اجتماعی: هر کدام یک بار -->
+      <p class="section-title reveal d6">شبکه‌های اجتماعی</p>
       <nav class="links">
         <a
-          class="link ig reveal d5"
+          class="link ig reveal d6"
           href="https://www.instagram.com/khiamnabizada?mdxt=a2lxc25pZWlzNHEw&amp;utm_source=qr"
           target="_blank"
           rel="noopener"
@@ -738,7 +767,7 @@
         </a>
 
         <a
-          class="link fb reveal d6"
+          class="link fb reveal d7"
           href="https://www.facebook.com/ahmadkhiam.nabizadanabizada?mibextid=wwXIfr&amp;mibextid=wwXIfr"
           target="_blank"
           rel="noopener"
@@ -752,7 +781,7 @@
         </a>
 
         <a
-          class="link yt reveal d6"
+          class="link yt reveal d7"
           href="https://youtube.com/@laughstore?si=yanjar9bNgd7PKH2"
           target="_blank"
           rel="noopener"
@@ -764,71 +793,159 @@
           </div>
           <div class="chev"><i class="fa-solid fa-chevron-left"></i></div>
         </a>
-
-        <a
-          class="link wa reveal d7"
-          href="https://wa.me/93786131213"
-          target="_blank"
-          rel="noopener"
-        >
-          <div class="icon"><i class="fa-brands fa-whatsapp"></i></div>
-          <div class="meta">
-            <strong>چت واتساپ</strong>
-            <small>پیام مستقیم</small>
-          </div>
-          <div class="chev"><i class="fa-solid fa-chevron-left"></i></div>
-        </a>
       </nav>
 
-      <footer class="reveal d7">
+      <footer class="reveal d8">
         <p dir="ltr">© 2026 · Khiam Nabizada</p>
       </footer>
     </main>
 
     <script>
-      (function () {
-        const fine = window.matchMedia(
-          "(hover: hover) and (pointer: fine)",
-        ).matches;
-        if (!fine) return;
-        document.body.classList.add("custom-cursor");
+      const CONTACT = {
+        firstName: "Khiam",
+        lastName: "Nabizada",
+        fullName: "Khiam Nabizada",
+        phone: "+93786131213",
+        email: "tdp.ahmadkhiam@gmail.com",
+        instagram: "https://www.instagram.com/khiamnabizada",
+        facebook: "https://www.facebook.com/ahmadkhiam.nabizadanabizada",
+        youtube: "https://youtube.com/@laughstore",
+        whatsapp: "https://wa.me/93786131213",
+      };
 
+      function buildVCard() {
+        return [
+          "BEGIN:VCARD",
+          "VERSION:3.0",
+          "N:" + CONTACT.lastName + ";" + CONTACT.firstName + ";;;",
+          "FN:" + CONTACT.fullName,
+          "TEL;TYPE=CELL,VOICE:" + CONTACT.phone,
+          "EMAIL;TYPE=INTERNET:" + CONTACT.email,
+          "URL:" + CONTACT.instagram,
+          "URL:" + CONTACT.facebook,
+          "URL:" + CONTACT.youtube,
+          "URL:" + CONTACT.whatsapp,
+          "END:VCARD",
+        ].join("\r\n");
+      }
+
+      async function saveContact() {
+        const vcard = buildVCard();
+        const fileName = "Khiam-Nabizada.vcf";
+        const btn = document.getElementById("saveContactBtn");
+        const label = document.getElementById("saveContactLabel");
+
+        const ua = navigator.userAgent || "";
+        const isIOS =
+          /iPad|iPhone|iPod/.test(ua) ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+        if (isIOS) {
+          const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
+          const url = URL.createObjectURL(blob);
+          window.location.href = url;
+          setTimeout(() => URL.revokeObjectURL(url), 15000);
+          return;
+        }
+
+        const file = new File([vcard], fileName, { type: "text/vcard" });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({
+              files: [file],
+              title: CONTACT.fullName,
+              text: "ذخیره در مخاطبین / Save to Contacts",
+            });
+            return;
+          } catch (err) {
+            if (err && err.name === "AbortError") return;
+          }
+        }
+
+        const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        if (btn && label) {
+          const original = label.textContent;
+          btn.classList.add("saved");
+          label.textContent = "دانلود شد ✓";
+          setTimeout(() => {
+            btn.classList.remove("saved");
+            label.textContent = original;
+          }, 3000);
+        }
+
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+      }
+
+      document
+        .getElementById("saveContactBtn")
+        .addEventListener("click", saveContact);
+
+      (function () {
         const dot = document.getElementById("cursorDot");
         const ring = document.getElementById("cursorRing");
+
+        const isTouch =
+          navigator.maxTouchPoints > 0 ||
+          "ontouchstart" in window ||
+          window.matchMedia("(pointer: coarse)").matches;
+
+        const hasFinePointer = window.matchMedia(
+          "(hover: hover) and (pointer: fine)",
+        ).matches;
+
+        if (isTouch || !hasFinePointer) {
+          dot.style.display = "none";
+          ring.style.display = "none";
+          return;
+        }
+
         let mx = window.innerWidth / 2;
         let my = window.innerHeight / 2;
         let rx = mx,
           ry = my;
 
-        document.addEventListener("mousemove", (e) => {
+        document.addEventListener("mousemove", function (e) {
+          if (!document.body.classList.contains("custom-cursor")) {
+            document.body.classList.add("custom-cursor");
+          }
           mx = e.clientX;
           my = e.clientY;
-          dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+          dot.style.transform =
+            "translate(" + mx + "px, " + my + "px) translate(-50%, -50%)";
         });
 
         (function animateRing() {
           rx += (mx - rx) * 0.18;
           ry += (my - ry) * 0.18;
-          ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+          ring.style.transform =
+            "translate(" + rx + "px, " + ry + "px) translate(-50%, -50%)";
           requestAnimationFrame(animateRing);
         })();
 
         document
           .querySelectorAll("a, button, .btn, .link, .logo")
-          .forEach((el) => {
-            el.addEventListener("mouseenter", () =>
-              document.body.classList.add("cursor-hover"),
-            );
-            el.addEventListener("mouseleave", () =>
-              document.body.classList.remove("cursor-hover"),
-            );
+          .forEach(function (el) {
+            el.addEventListener("mouseenter", function () {
+              document.body.classList.add("cursor-hover");
+            });
+            el.addEventListener("mouseleave", function () {
+              document.body.classList.remove("cursor-hover");
+            });
           });
 
-        document.addEventListener("mouseleave", () => {
+        document.addEventListener("mouseleave", function () {
           dot.style.opacity = "0";
           ring.style.opacity = "0";
         });
-        document.addEventListener("mouseenter", () => {
+        document.addEventListener("mouseenter", function () {
           dot.style.opacity = "1";
           ring.style.opacity = "1";
         });

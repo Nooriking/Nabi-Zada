@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#e8f0fe" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="description" content="خیام نبی زاده — ارتباط، اعتماد، همراهی" />
+    <title>خیام نبی زاده</title>
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Vazirmatn:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ===== پالت ۳ رنگی ===== */
+      :root {
+        --navy: #0a2540;
+        --blue: #1a73e8;
+        --sky: #e8f0fe;
+        --white: #ffffff;
+
+        /* رنگ برندها (فقط برای آیکون‌ها) */
+        --wa: #25d366;
+        --fb: #1877f2;
+        --yt: #ff0000;
+
+        --text: var(--navy);
+        --muted: rgba(10, 37, 64, 0.62);
+        --line: rgba(26, 115, 232, 0.22);
+        --tap: 50px;
+        --safe-t: env(safe-area-inset-top, 0px);
+        --safe-b: env(safe-area-inset-bottom, 0px);
+      }
+
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+        overscroll-behavior: none;
+      }
+
+      body {
+        font-family: "Vazirmatn", "Inter", sans-serif;
+        color: var(--text);
+        background: var(--sky);
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        justify-content: center;
+        overflow-x: hidden;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        body.custom-cursor,
+        body.custom-cursor * {
+          cursor: none !important;
+        }
+        .cursor-dot,
+        .cursor-ring {
+          position: fixed;
+          top: 0;
+          left: 0;
+          pointer-events: none;
+          border-radius: 50%;
+          z-index: 9999;
+          transform: translate(-50%, -50%);
+          will-change: transform;
+        }
+        .cursor-dot {
+          width: 8px;
+          height: 8px;
+          background: var(--navy);
+          box-shadow: 0 0 12px rgba(26, 115, 232, 0.55);
+          transition:
+            width 0.18s ease,
+            height 0.18s ease,
+            background 0.18s ease;
+        }
+        .cursor-ring {
+          width: 34px;
+          height: 34px;
+          border: 1.5px solid rgba(26, 115, 232, 0.55);
+          background: rgba(232, 240, 254, 0.55);
+          transition:
+            width 0.25s ease,
+            height 0.25s ease,
+            border-color 0.25s ease,
+            background 0.25s ease;
+        }
+        body.cursor-hover .cursor-dot {
+          width: 14px;
+          height: 14px;
+          background: var(--blue);
+        }
+        body.cursor-hover .cursor-ring {
+          width: 52px;
+          height: 52px;
+          border-color: var(--navy);
+          background: rgba(26, 115, 232, 0.14);
+        }
+      }
+
+      .orbs {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 0;
+      }
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        animation: floatOrb 14s ease-in-out infinite;
+      }
+      .orb.o1 {
+        width: 220px;
+        height: 220px;
+        background: radial-gradient(
+          circle,
+          rgba(26, 115, 232, 0.45),
+          transparent 70%
+        );
+        top: -40px;
+        right: -40px;
+        opacity: 0.75;
+      }
+      .orb.o2 {
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(
+          circle,
+          rgba(10, 37, 64, 0.28),
+          transparent 70%
+        );
+        bottom: 120px;
+        left: -60px;
+        animation-delay: -4s;
+        opacity: 0.7;
+      }
+      .orb.o3 {
+        width: 180px;
+        height: 180px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.95),
+          transparent 70%
+        );
+        top: 40%;
+        right: -50px;
+        animation-delay: -8s;
+        opacity: 0.9;
+      }
+      @keyframes floatOrb {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(-20px, 25px) scale(1.08);
+        }
+      }
+
+      .phone {
+        width: 100%;
+        max-width: 430px;
+        min-height: 100vh;
+        min-height: 100dvh;
+        position: relative;
+        overflow: visible;
+        background:
+          radial-gradient(
+            ellipse 90% 45% at 50% -8%,
+            rgba(26, 115, 232, 0.16),
+            transparent 55%
+          ),
+          var(--sky);
+        display: flex;
+        flex-direction: column;
+        padding: calc(16px + var(--safe-t)) 16px calc(12px + var(--safe-b));
+        z-index: 1;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(14px);
+        animation: fadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      .reveal.d1 {
+        animation-delay: 0.05s;
+      }
+      .reveal.d2 {
+        animation-delay: 0.15s;
+      }
+      .reveal.d3 {
+        animation-delay: 0.25s;
+      }
+      .reveal.d4 {
+        animation-delay: 0.35s;
+      }
+      .reveal.d5 {
+        animation-delay: 0.45s;
+      }
+      .reveal.d6 {
+        animation-delay: 0.55s;
+      }
+      .reveal.d7 {
+        animation-delay: 0.65s;
+      }
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .logo {
+        width: 96px;
+        height: 96px;
+        margin: 0 auto 10px;
+        border-radius: 22px;
+        background: var(--white);
+        overflow: hidden;
+        border: 2px solid var(--blue);
+        box-shadow:
+          0 0 0 4px var(--sky),
+          0 0 0 6px rgba(26, 115, 232, 0.28),
+          0 16px 36px -14px rgba(10, 37, 64, 0.35);
+        transition:
+          transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 0.4s ease;
+        position: relative;
+      }
+      .logo::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(
+          120deg,
+          transparent 30%,
+          rgba(232, 240, 254, 0.9) 50%,
+          transparent 70%
+        );
+        transform: translateX(-120%);
+        transition: transform 0.9s ease;
+        pointer-events: none;
+      }
+      .logo:hover {
+        transform: rotate(-6deg) scale(1.05);
+        box-shadow:
+          0 0 0 4px var(--sky),
+          0 0 0 6px rgba(10, 37, 64, 0.45),
+          0 22px 46px -14px rgba(10, 37, 64, 0.55);
+      }
+      .logo:hover::after {
+        transform: translateX(120%);
+      }
+      .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .brand {
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 18px;
+        font-weight: 800;
+        line-height: 1.5;
+        background: linear-gradient(
+          90deg,
+          var(--navy) 0%,
+          var(--blue) 35%,
+          var(--navy) 50%,
+          var(--blue) 65%,
+          var(--navy) 100%
+        );
+        background-size: 220% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shineText 6s linear infinite;
+      }
+      @keyframes shineText {
+        to {
+          background-position: 220% center;
+        }
+      }
+
+      .en {
+        margin-top: 4px;
+        font-family: "Inter", sans-serif;
+        font-size: 10.5px;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--blue);
+      }
+
+      .rule {
+        width: 36px;
+        height: 2px;
+        margin: 10px auto 0;
+        border-radius: 99px;
+        background: var(--blue);
+        position: relative;
+        overflow: hidden;
+      }
+      .rule::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--sky),
+          transparent
+        );
+        animation: ruleShine 2.4s ease-in-out infinite;
+      }
+      @keyframes ruleShine {
+        0% {
+          transform: translateX(-100%);
+        }
+        60%,
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      .quote {
+        margin: 10px auto 0;
+        max-width: 280px;
+        font-size: 13px;
+        line-height: 1.9;
+        color: var(--muted);
+      }
+
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 16px;
+      }
+      .btn {
+        height: var(--tap);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-radius: 16px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 700;
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.3s ease,
+          background 0.3s ease;
+      }
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -80%;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(
+          100deg,
+          transparent,
+          rgba(232, 240, 254, 0.65),
+          transparent
+        );
+        transform: skewX(-20deg);
+        transition: left 0.7s ease;
+        z-index: 1;
+      }
+      .btn:hover::before {
+        left: 130%;
+      }
+      .btn i {
+        font-size: 13px;
+        position: relative;
+        z-index: 2;
+        transition: transform 0.3s ease;
+      }
+      .btn span {
+        position: relative;
+        z-index: 2;
+      }
+      .btn:hover i {
+        transform: translateY(-1px) rotate(-8deg) scale(1.15);
+      }
+      .btn-blue {
+        background: var(--blue);
+        color: var(--white);
+        box-shadow: 0 10px 22px -12px rgba(26, 115, 232, 0.75);
+      }
+      .btn-blue:hover {
+        background: var(--navy);
+        box-shadow: 0 14px 28px -10px rgba(10, 37, 64, 0.7);
+      }
+      .btn-ghost {
+        background: var(--white);
+        color: var(--blue);
+        border: 1px solid var(--blue);
+      }
+      .btn-ghost:hover {
+        background: var(--sky);
+        color: var(--navy);
+        border-color: var(--navy);
+      }
+      .btn-wide {
+        grid-column: 1 / -1;
+      }
+      .btn:active {
+        transform: scale(0.965);
+      }
+
+      .btn-save {
+        background: var(--navy);
+        color: var(--white);
+        border: 1px solid var(--navy);
+        animation: softPulse 3s ease-in-out infinite;
+      }
+      .btn-save:hover {
+        background: var(--blue);
+        border-color: var(--blue);
+      }
+      @keyframes softPulse {
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(26, 115, 232, 0.4);
+        }
+        50% {
+          box-shadow: 0 0 0 8px rgba(26, 115, 232, 0);
+        }
+      }
+
+      .phone-num {
+        margin-top: 10px;
+        text-align: center;
+        font-family: "Inter", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        direction: ltr;
+        transition: color 0.3s ease;
+      }
+      .phone-num:hover {
+        color: var(--navy);
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 16px 0 10px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--navy);
+      }
+      .section-title::before,
+      .section-title::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--line);
+      }
+
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 58px;
+        padding: 8px 12px;
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        text-decoration: none;
+        color: inherit;
+        transition:
+          transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+          border-color 0.3s ease,
+          background 0.3s ease,
+          box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .link::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          120deg,
+          transparent 40%,
+          rgba(26, 115, 232, 0.1) 50%,
+          transparent 60%
+        );
+        transform: translateX(-120%);
+        transition: transform 0.8s ease;
+        pointer-events: none;
+      }
+      .link:hover::after {
+        transform: translateX(120%);
+      }
+      .link:hover {
+        transform: translateY(-3px);
+        border-color: var(--navy);
+        background: var(--sky);
+        box-shadow: 0 14px 26px -16px rgba(10, 37, 64, 0.4);
+      }
+      .link:active {
+        transform: scale(0.985);
+      }
+
+      .icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        font-size: 18px;
+        color: var(--white);
+        transition:
+          transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 0.3s ease;
+      }
+      .link:hover .icon {
+        transform: rotate(-10deg) scale(1.1);
+      }
+
+      /* ====== رنگ برند هر آیکون ====== */
+      .ig .icon {
+        background: linear-gradient(
+          45deg,
+          #f09433,
+          #e6683c,
+          #dc2743,
+          #cc2366,
+          #bc1888
+        );
+        box-shadow: 0 4px 12px -4px rgba(220, 39, 67, 0.5);
+      }
+      .fb .icon {
+        background: var(--fb);
+        box-shadow: 0 4px 12px -4px rgba(24, 119, 242, 0.5);
+      }
+      .yt .icon {
+        background: var(--yt);
+        box-shadow: 0 4px 12px -4px rgba(255, 0, 0, 0.45);
+      }
+      .wa .icon {
+        background: var(--wa);
+        box-shadow: 0 4px 12px -4px rgba(37, 211, 102, 0.5);
+      }
+
+      .meta {
+        flex: 1;
+        min-width: 0;
+      }
+      .meta strong {
+        display: block;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--navy);
+      }
+      .meta small {
+        display: block;
+        margin-top: 2px;
+        font-size: 11.5px;
+        font-weight: 500;
+        color: var(--muted);
+      }
+      .handle {
+        font-family: "Inter", sans-serif;
+        direction: ltr;
+        text-align: right;
+        unicode-bidi: isolate;
+      }
+
+      .chev {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: var(--sky);
+        color: var(--blue);
+        flex-shrink: 0;
+        transition:
+          transform 0.3s ease,
+          background 0.3s ease,
+          color 0.3s ease;
+      }
+      .link:hover .chev {
+        transform: translateX(-3px);
+        background: var(--navy);
+        color: var(--white);
+      }
+      .chev i {
+        font-size: 10px;
+      }
+
+      footer {
+        margin-top: 16px;
+        text-align: center;
+      }
+      footer p {
+        font-family: "Inter", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+      }
+
+      @media (max-height: 700px) {
+        .phone {
+          padding-top: calc(12px + var(--safe-t));
+        }
+        .logo {
+          width: 88px;
+          height: 88px;
+          margin-bottom: 8px;
+          border-radius: 22px;
+        }
+        h1 {
+          font-size: 16px;
+        }
+        .quote,
+        .phone-num {
+          display: none;
+        }
+        .link {
+          min-height: 52px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="orbs" aria-hidden="true">
+      <span class="orb o1"></span>
+      <span class="orb o2"></span>
+      <span class="orb o3"></span>
+    </div>
+
+    <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+    <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+    <main class="phone">
+      <header class="brand">
+        <div class="logo reveal d1">
+          <img src="347A4321.JPG.jpg" alt="خیام نبی زاده" />
+        </div>
+        <h1 class="reveal d2">خیام نبی زاده</h1>
+        <p class="en reveal d2">Khiam Nabizada</p>
+        <div class="rule reveal d3"></div>
+        <p class="quote reveal d3">ارتباط، اعتماد، همراهی.</p>
+      </header>
+
+      <div class="actions reveal d4">
+        <a class="btn btn-blue" href="tel:+93786131213">
+          <i class="fa-solid fa-phone"></i>
+          <span>تماس</span>
+        </a>
+        <a
+          class="btn btn-ghost"
+          href="https://wa.me/93786131213"
+          target="_blank"
+          rel="noopener"
+        >
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>واتساپ</span>
+        </a>
+        <a
+          class="btn btn-save btn-wide"
+          href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3AKhiam%20Nabizada%0AN%3ANabizada%3BKhiam%3B%3B%3B%0ATEL%3BTYPE%3DCELL%3A%2B93786131213%0AURL%3Ahttps%3A%2F%2Fwww.instagram.com%2Fkhiamnabizada%0AURL%3Ahttps%3A%2F%2Fwww.facebook.com%2Fahmadkhiam.nabizadanabizada%0AURL%3Ahttps%3A%2F%2Fyoutube.com%2F%40laughstore%0AEND%3AVCARD"
+          download="Khiam-Nabizada.vcf"
+        >
+          <i class="fa-solid fa-address-card"></i>
+          <span>ذخیره مخاطب / Add Contact</span>
+        </a>
+      </div>
+      <p class="phone-num reveal d5">078 613 1213</p>
+
+      <p class="section-title reveal d5">شبکه‌های اجتماعی</p>
+      <nav class="links">
+        <a
+          class="link ig reveal d5"
+          href="https://www.instagram.com/khiamnabizada?mdxt=a2lxc25pZWlzNHEw&amp;utm_source=qr"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="icon"><i class="fa-brands fa-instagram"></i></div>
+          <div class="meta">
+            <strong>اینستاگرام</strong>
+            <small class="handle">@khiamnabizada</small>
+          </div>
+          <div class="chev"><i class="fa-solid fa-chevron-left"></i></div>
+        </a>
+
+        <a
+          class="link fb reveal d6"
+          href="https://www.facebook.com/ahmadkhiam.nabizadanabizada?mibextid=wwXIfr&amp;mibextid=wwXIfr"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="icon"><i class="fa-brands fa-facebook-f"></i></div>
+          <div class="meta">
+            <strong>فیسبوک</strong>
+            <small>Ahmad Khiam Nabizada</small>
+          </div>
+          <div class="chev"><i class="fa-solid fa-chevron-left"></i></div>
+        </a>
+
+        <a
+          class="link yt reveal d6"
+          href="https://youtube.com/@laughstore?si=yanjar9bNgd7PKH2"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="icon"><i class="fa-brands fa-youtube"></i></div>
+          <div class="meta">
+            <strong>یوتیوب</strong>
+            <small class="handle">@laughstore</small>
+          </div>
+          <div class="chev"><i class="fa-solid fa-chevron-left"></i></div>
+        </a>
+
+        <a
+          class="link wa reveal d7"
+          href="https://wa.me/93786131213"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="icon"><i class="fa-brands fa-whatsapp"></i></div>
+          <div class="meta">
+            <strong>چت واتساپ</strong>
+            <small>پیام مستقیم</small>
+          </div>
+          <div class="chev"><i class="fa-solid fa-chevron-left"></i></div>
+        </a>
+      </nav>
+
+      <footer class="reveal d7">
+        <p dir="ltr">© 2026 · Khiam Nabizada</p>
+      </footer>
+    </main>
+
+    <script>
+      (function () {
+        const fine = window.matchMedia(
+          "(hover: hover) and (pointer: fine)",
+        ).matches;
+        if (!fine) return;
+        document.body.classList.add("custom-cursor");
+
+        const dot = document.getElementById("cursorDot");
+        const ring = document.getElementById("cursorRing");
+        let mx = window.innerWidth / 2;
+        let my = window.innerHeight / 2;
+        let rx = mx,
+          ry = my;
+
+        document.addEventListener("mousemove", (e) => {
+          mx = e.clientX;
+          my = e.clientY;
+          dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+        });
+
+        (function animateRing() {
+          rx += (mx - rx) * 0.18;
+          ry += (my - ry) * 0.18;
+          ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+          requestAnimationFrame(animateRing);
+        })();
+
+        document
+          .querySelectorAll("a, button, .btn, .link, .logo")
+          .forEach((el) => {
+            el.addEventListener("mouseenter", () =>
+              document.body.classList.add("cursor-hover"),
+            );
+            el.addEventListener("mouseleave", () =>
+              document.body.classList.remove("cursor-hover"),
+            );
+          });
+
+        document.addEventListener("mouseleave", () => {
+          dot.style.opacity = "0";
+          ring.style.opacity = "0";
+        });
+        document.addEventListener("mouseenter", () => {
+          dot.style.opacity = "1";
+          ring.style.opacity = "1";
+        });
+      })();
+    </script>
+  </body>
+</html>

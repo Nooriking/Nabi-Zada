@@ -6,9 +6,12 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <meta name="theme-color" content="#e8f0fe" />
+    <meta name="theme-color" content="#0a2540" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
     <meta name="description" content="خیام نبی زاده — ارتباط، اعتماد، همراهی" />
     <title>خیام نبی زاده</title>
 
@@ -17,22 +20,25 @@
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Vazirmatn:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --navy: #0a2540;
-        --blue: #1a73e8;
-        --sky: #e8f0fe;
-        --white: #ffffff;
+        --bg: #0a1628;
+        --bg2: #0f1f38;
+        --card: rgba(255, 255, 255, 0.05);
+        --card-hover: rgba(255, 255, 255, 0.09);
+        --border: rgba(255, 255, 255, 0.1);
+        --accent: #4f9eff;
+        --accent2: #6ee7ff;
+        --gold: #f5b942;
+        --text: #f0f6ff;
+        --muted: rgba(240, 246, 255, 0.55);
         --wa: #25d366;
         --fb: #1877f2;
         --yt: #ff0000;
-        --text: var(--navy);
-        --muted: rgba(10, 37, 64, 0.62);
-        --line: rgba(26, 115, 232, 0.22);
-        --tap: 50px;
+        --radius: 18px;
         --safe-t: env(safe-area-inset-top, 0px);
         --safe-b: env(safe-area-inset-bottom, 0px);
       }
@@ -44,636 +50,476 @@
         padding: 0;
       }
 
-      html,
       body {
-        min-height: 100%;
-        overscroll-behavior: none;
-      }
-
-      body {
-        font-family: "Vazirmatn", "Inter", sans-serif;
+        font-family: "Vazirmatn", sans-serif;
         color: var(--text);
-        background: var(--sky);
-        min-height: 100vh;
+        background: var(--bg);
         min-height: 100dvh;
         display: flex;
         justify-content: center;
         overflow-x: hidden;
       }
 
-      .cursor-dot,
-      .cursor-ring {
-        position: fixed;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        border-radius: 50%;
-        z-index: 9999;
-        transform: translate(-50%, -50%);
-        will-change: transform;
-        opacity: 0;
-        display: none;
-      }
-      body.custom-cursor .cursor-dot,
-      body.custom-cursor .cursor-ring {
-        display: block;
-        opacity: 1;
-      }
-      body.custom-cursor,
-      body.custom-cursor * {
-        cursor: none !important;
-      }
-
-      .cursor-dot {
-        width: 8px;
-        height: 8px;
-        background: var(--navy);
-        box-shadow: 0 0 12px rgba(26, 115, 232, 0.55);
-        transition:
-          width 0.18s ease,
-          height 0.18s ease,
-          background 0.18s ease;
-      }
-      .cursor-ring {
-        width: 34px;
-        height: 34px;
-        border: 1.5px solid rgba(26, 115, 232, 0.55);
-        background: rgba(232, 240, 254, 0.55);
-        transition:
-          width 0.25s ease,
-          height 0.25s ease,
-          border-color 0.25s ease,
-          background 0.25s ease;
-      }
-      body.cursor-hover .cursor-dot {
-        width: 14px;
-        height: 14px;
-        background: var(--blue);
-      }
-      body.cursor-hover .cursor-ring {
-        width: 52px;
-        height: 52px;
-        border-color: var(--navy);
-        background: rgba(26, 115, 232, 0.14);
-      }
-
-      .orbs {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        overflow: hidden;
-        z-index: 0;
-      }
-      .orb {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(60px);
-        animation: floatOrb 14s ease-in-out infinite;
-      }
-      .orb.o1 {
-        width: 220px;
-        height: 220px;
-        background: radial-gradient(
-          circle,
-          rgba(26, 115, 232, 0.45),
-          transparent 70%
-        );
-        top: -40px;
-        right: -40px;
-        opacity: 0.75;
-      }
-      .orb.o2 {
-        width: 200px;
-        height: 200px;
-        background: radial-gradient(
-          circle,
-          rgba(10, 37, 64, 0.28),
-          transparent 70%
-        );
-        bottom: 120px;
-        left: -60px;
-        animation-delay: -4s;
-        opacity: 0.7;
-      }
-      .orb.o3 {
-        width: 180px;
-        height: 180px;
-        background: radial-gradient(
-          circle,
-          rgba(255, 255, 255, 0.95),
-          transparent 70%
-        );
-        top: 40%;
-        right: -50px;
-        animation-delay: -8s;
-        opacity: 0.9;
-      }
-      @keyframes floatOrb {
-        0%,
-        100% {
-          transform: translate(0, 0) scale(1);
-        }
-        50% {
-          transform: translate(-20px, 25px) scale(1.08);
-        }
-      }
-
       .phone {
         width: 100%;
         max-width: 430px;
-        min-height: 100vh;
         min-height: 100dvh;
         position: relative;
-        overflow: visible;
         background:
           radial-gradient(
-            ellipse 90% 45% at 50% -8%,
-            rgba(26, 115, 232, 0.16),
-            transparent 55%
+            ellipse 120% 60% at 50% -10%,
+            rgba(79, 158, 255, 0.18),
+            transparent 60%
           ),
-          var(--sky);
+          radial-gradient(
+            ellipse 80% 50% at 80% 110%,
+            rgba(110, 231, 255, 0.08),
+            transparent 60%
+          ),
+          var(--bg);
         display: flex;
         flex-direction: column;
-        padding: calc(16px + var(--safe-t)) 16px calc(12px + var(--safe-b));
+        padding: calc(20px + var(--safe-t)) 18px calc(16px + var(--safe-b));
+        overflow: hidden;
+      }
+
+      /* ===== Animated grid lines background ===== */
+      .phone::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(79, 158, 255, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(79, 158, 255, 0.05) 1px, transparent 1px);
+        background-size: 40px 40px;
+        mask-image: radial-gradient(
+          ellipse 80% 60% at 50% 30%,
+          black,
+          transparent 80%
+        );
+        -webkit-mask-image: radial-gradient(
+          ellipse 80% 60% at 50% 30%,
+          black,
+          transparent 80%
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .phone > * {
+        position: relative;
         z-index: 1;
       }
 
-      .reveal {
+      /* ===== Reveal ===== */
+      .r {
         opacity: 0;
-        transform: translateY(14px);
-        animation: fadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        transform: translateY(12px);
+        animation: up 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
       }
-      .reveal.d1 {
+      .r1 {
         animation-delay: 0.05s;
       }
-      .reveal.d2 {
-        animation-delay: 0.15s;
+      .r2 {
+        animation-delay: 0.12s;
       }
-      .reveal.d3 {
-        animation-delay: 0.25s;
+      .r3 {
+        animation-delay: 0.19s;
       }
-      .reveal.d4 {
-        animation-delay: 0.35s;
+      .r4 {
+        animation-delay: 0.26s;
       }
-      .reveal.d5 {
-        animation-delay: 0.45s;
+      .r5 {
+        animation-delay: 0.33s;
       }
-      .reveal.d6 {
-        animation-delay: 0.55s;
+      .r6 {
+        animation-delay: 0.4s;
       }
-      .reveal.d7 {
-        animation-delay: 0.65s;
-      }
-      .reveal.d8 {
-        animation-delay: 0.75s;
-      }
-      @keyframes fadeUp {
+      @keyframes up {
         to {
           opacity: 1;
           transform: translateY(0);
         }
       }
 
-      .logo {
-        width: 96px;
-        height: 96px;
-        margin: 0 auto 10px;
-        border-radius: 22px;
-        background: var(--white);
-        overflow: hidden;
-        border: 2px solid var(--blue);
-        box-shadow:
-          0 0 0 4px var(--sky),
-          0 0 0 6px rgba(26, 115, 232, 0.28),
-          0 16px 36px -14px rgba(10, 37, 64, 0.35);
-        transition:
-          transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-          box-shadow 0.4s ease;
-        position: relative;
-      }
-      .logo::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: inherit;
-        background: linear-gradient(
-          120deg,
-          transparent 30%,
-          rgba(232, 240, 254, 0.9) 50%,
-          transparent 70%
-        );
-        transform: translateX(-120%);
-        transition: transform 0.9s ease;
-        pointer-events: none;
-      }
-      .logo:hover {
-        transform: rotate(-6deg) scale(1.05);
-        box-shadow:
-          0 0 0 4px var(--sky),
-          0 0 0 6px rgba(10, 37, 64, 0.45),
-          0 22px 46px -14px rgba(10, 37, 64, 0.55);
-      }
-      .logo:hover::after {
-        transform: translateX(120%);
-      }
-      .logo img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
+      /* ===== Hero ===== */
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 8px 0 4px;
       }
 
-      .brand {
-        text-align: center;
+      .avatar-ring {
+        position: relative;
+        width: 108px;
+        height: 108px;
+        margin-bottom: 14px;
+      }
+      .avatar-ring::before {
+        content: "";
+        position: absolute;
+        inset: -6px;
+        border-radius: 50%;
+        background: conic-gradient(
+          from 0deg,
+          var(--accent),
+          var(--accent2),
+          var(--gold),
+          var(--accent)
+        );
+        animation: spin 6s linear infinite;
+        z-index: 0;
+      }
+      .avatar-ring::after {
+        content: "";
+        position: absolute;
+        inset: -3px;
+        border-radius: 50%;
+        background: var(--bg);
+        z-index: 1;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .avatar-ring img {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+        border: 3px solid var(--bg);
       }
 
       h1 {
-        font-size: 18px;
+        font-size: 22px;
         font-weight: 800;
-        line-height: 1.5;
-        background: linear-gradient(
-          90deg,
-          var(--navy) 0%,
-          var(--blue) 35%,
-          var(--navy) 50%,
-          var(--blue) 65%,
-          var(--navy) 100%
-        );
-        background-size: 220% auto;
+        letter-spacing: -0.02em;
+        background: linear-gradient(135deg, #fff 30%, var(--accent2));
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
-        animation: shineText 6s linear infinite;
+        line-height: 1.3;
       }
-      @keyframes shineText {
-        to {
-          background-position: 220% center;
-        }
-      }
-
       .en {
         margin-top: 4px;
-        font-family: "Inter", sans-serif;
         font-size: 10.5px;
         font-weight: 600;
-        letter-spacing: 0.2em;
+        letter-spacing: 0.28em;
         text-transform: uppercase;
-        color: var(--blue);
-      }
-
-      .rule {
-        width: 36px;
-        height: 2px;
-        margin: 10px auto 0;
-        border-radius: 99px;
-        background: var(--blue);
-        position: relative;
-        overflow: hidden;
-      }
-      .rule::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          var(--sky),
-          transparent
-        );
-        animation: ruleShine 2.4s ease-in-out infinite;
-      }
-      @keyframes ruleShine {
-        0% {
-          transform: translateX(-100%);
-        }
-        60%,
-        100% {
-          transform: translateX(100%);
-        }
-      }
-
-      .quote {
-        margin: 10px auto 0;
-        max-width: 280px;
-        font-size: 13px;
-        line-height: 1.9;
         color: var(--muted);
       }
 
-      /* ====== دکمه‌های بالا: فقط 2 دکمه ====== */
+      .quote {
+        margin-top: 12px;
+        font-size: 12.5px;
+        color: var(--muted);
+        padding: 6px 16px;
+        border: 1px solid var(--border);
+        border-radius: 99px;
+        background: var(--card);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      /* ===== Action buttons ===== */
       .actions {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
-        margin-top: 16px;
+        margin-top: 20px;
       }
       .btn {
-        height: var(--tap);
+        height: 52px;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
-        border-radius: 16px;
-        text-decoration: none;
-        font-family: inherit;
-        font-size: 14px;
-        font-weight: 700;
+        border-radius: 14px;
+        font:
+          700 14px "Vazirmatn",
+          sans-serif;
         border: none;
+        cursor: pointer;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.2s ease;
+        text-decoration: none;
         position: relative;
         overflow: hidden;
-        isolation: isolate;
-        transition:
-          transform 0.2s ease,
-          box-shadow 0.3s ease,
-          background 0.3s ease;
-        cursor: pointer;
-      }
-      .btn::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -80%;
-        width: 60%;
-        height: 100%;
-        background: linear-gradient(
-          100deg,
-          transparent,
-          rgba(232, 240, 254, 0.65),
-          transparent
-        );
-        transform: skewX(-20deg);
-        transition: left 0.7s ease;
-        z-index: 1;
-      }
-      .btn:hover::before {
-        left: 130%;
-      }
-      .btn i {
-        font-size: 13px;
-        position: relative;
-        z-index: 2;
-        transition: transform 0.3s ease;
-      }
-      .btn span {
-        position: relative;
-        z-index: 2;
-      }
-      .btn:hover i {
-        transform: translateY(-1px) rotate(-8deg) scale(1.15);
-      }
-      .btn-blue {
-        background: var(--blue);
-        color: var(--white);
-        box-shadow: 0 10px 22px -12px rgba(26, 115, 232, 0.75);
-      }
-      .btn-blue:hover {
-        background: var(--navy);
-        box-shadow: 0 14px 28px -10px rgba(10, 37, 64, 0.7);
       }
       .btn:active {
-        transform: scale(0.965);
+        transform: scale(0.96);
       }
-
-      .btn-save {
-        background: var(--navy);
-        color: var(--white);
-        border: 1px solid var(--navy);
-        animation: softPulse 3s ease-in-out infinite;
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent), #3d7dd6);
+        color: #fff;
+        box-shadow: 0 8px 24px -8px rgba(79, 158, 255, 0.6);
       }
-      .btn-save:hover {
-        background: var(--blue);
-        border-color: var(--blue);
+      .btn-primary:hover {
+        box-shadow: 0 12px 28px -8px rgba(79, 158, 255, 0.8);
       }
-      @keyframes softPulse {
-        0%,
-        100% {
-          box-shadow: 0 0 0 0 rgba(26, 115, 232, 0.4);
-        }
-        50% {
-          box-shadow: 0 0 0 8px rgba(26, 115, 232, 0);
-        }
+      .btn-ghost {
+        background: var(--card);
+        color: var(--text);
+        border: 1px solid var(--border);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
       }
-      .btn-save.saved {
-        background: #1a9e4a;
-        border-color: #1a9e4a;
-        animation: none;
+      .btn-ghost:hover {
+        background: var(--card-hover);
+        border-color: rgba(79, 158, 255, 0.4);
+      }
+      .btn-ghost.saved {
+        background: rgba(37, 211, 102, 0.15);
+        border-color: var(--wa);
+        color: #7dffa8;
       }
 
       .phone-num {
         margin-top: 10px;
         text-align: center;
-        font-family: "Inter", sans-serif;
         font-size: 12px;
         font-weight: 500;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.1em;
         color: var(--muted);
         direction: ltr;
-        transition: color 0.3s ease;
-      }
-      .phone-num:hover {
-        color: var(--navy);
       }
 
-      .section-title {
+      /* ===== Section label ===== */
+      .section-label {
+        margin: 22px 0 10px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--muted);
         display: flex;
         align-items: center;
         gap: 10px;
-        margin: 16px 0 10px;
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--navy);
       }
-      .section-title::before,
-      .section-title::after {
+      .section-label::after {
         content: "";
         flex: 1;
         height: 1px;
-        background: var(--line);
+        background: linear-gradient(90deg, var(--border), transparent);
       }
 
-      .links {
+      /* ===== Cards grid ===== */
+      .cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .card {
         display: flex;
         flex-direction: column;
-        gap: 8px;
-      }
-      .link {
-        display: flex;
-        align-items: center;
         gap: 12px;
-        min-height: 58px;
-        padding: 8px 12px;
-        background: var(--white);
-        border: 1px solid var(--line);
-        border-radius: 16px;
+        padding: 16px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
         text-decoration: none;
         color: inherit;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         transition:
-          transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-          border-color 0.3s ease,
-          background 0.3s ease,
-          box-shadow 0.3s ease;
+          transform 0.2s ease,
+          background 0.2s ease,
+          border-color 0.2s ease;
         position: relative;
         overflow: hidden;
       }
-      .link::after {
+      .card::before {
         content: "";
         position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          120deg,
-          transparent 40%,
-          rgba(26, 115, 232, 0.1) 50%,
-          transparent 60%
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: 60px;
+        background: radial-gradient(
+          circle,
+          rgba(79, 158, 255, 0.15),
+          transparent 70%
         );
-        transform: translateX(-120%);
-        transition: transform 0.8s ease;
         pointer-events: none;
       }
-      .link:hover::after {
-        transform: translateX(120%);
-      }
-      .link:hover {
+      .card:hover {
         transform: translateY(-3px);
-        border-color: var(--navy);
-        background: var(--sky);
-        box-shadow: 0 14px 26px -16px rgba(10, 37, 64, 0.4);
+        background: var(--card-hover);
+        border-color: rgba(79, 158, 255, 0.35);
       }
-      .link:active {
-        transform: scale(0.985);
+      .card:active {
+        transform: scale(0.98);
       }
-
-      .icon {
-        width: 40px;
-        height: 40px;
+      .card .icon {
+        width: 42px;
+        height: 42px;
         border-radius: 12px;
         display: grid;
         place-items: center;
-        flex-shrink: 0;
         font-size: 18px;
-        color: var(--white);
-        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        color: #fff;
+        position: relative;
+        z-index: 1;
       }
-      .link:hover .icon {
-        transform: rotate(-10deg) scale(1.1);
-      }
-
-      .ig .icon {
-        background: linear-gradient(
-          45deg,
-          #f09433,
-          #e6683c,
-          #dc2743,
-          #cc2366,
-          #bc1888
-        );
-        box-shadow: 0 4px 12px -4px rgba(220, 39, 67, 0.5);
-      }
-      .fb .icon {
-        background: var(--fb);
-        box-shadow: 0 4px 12px -4px rgba(24, 119, 242, 0.5);
-      }
-      .yt .icon {
-        background: var(--yt);
-        box-shadow: 0 4px 12px -4px rgba(255, 0, 0, 0.45);
-      }
-      .wa .icon {
-        background: var(--wa);
-        box-shadow: 0 4px 12px -4px rgba(37, 211, 102, 0.5);
-      }
-      .em .icon {
-        background: linear-gradient(135deg, var(--blue), var(--navy));
-        box-shadow: 0 4px 12px -4px rgba(26, 115, 232, 0.5);
-      }
-
-      .meta {
-        flex: 1;
-        min-width: 0;
-      }
-      .meta strong {
+      .card strong {
         display: block;
-        font-size: 14px;
+        font-size: 13.5px;
         font-weight: 700;
-        color: var(--navy);
+        margin-bottom: 3px;
       }
-      .meta small {
+      .card small {
         display: block;
-        margin-top: 2px;
-        font-size: 11.5px;
-        font-weight: 500;
+        font-size: 11px;
         color: var(--muted);
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-      }
-      .handle {
-        font-family: "Inter", sans-serif;
         direction: ltr;
         text-align: left;
-        unicode-bidi: isolate;
-      }
-      /* ایمیل: خط بشکند تا کامل دیده شود */
-      .em .meta small {
-        white-space: normal;
-        word-break: break-all;
-        overflow: visible;
-        text-overflow: clip;
-        font-size: 11px;
+        font-family: "Vazirmatn", sans-serif;
       }
 
-      .chev {
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
+      /* ===== Social rows ===== */
+      .social-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .social {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 14px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        text-decoration: none;
+        color: inherit;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transition:
+          transform 0.2s ease,
+          background 0.2s ease,
+          border-color 0.2s ease;
+      }
+      .social:hover {
+        transform: translateX(-4px);
+        background: var(--card-hover);
+        border-color: rgba(79, 158, 255, 0.35);
+      }
+      .social:active {
+        transform: scale(0.98);
+      }
+      .social .icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
         display: grid;
         place-items: center;
-        background: var(--sky);
-        color: var(--blue);
         flex-shrink: 0;
+        font-size: 17px;
+        color: #fff;
+      }
+      .social .meta {
+        flex: 1;
+        min-width: 0;
+      }
+      .social strong {
+        display: block;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .social small {
+        display: block;
+        margin-top: 2px;
+        font-size: 10.5px;
+        color: var(--muted);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        direction: ltr;
+        text-align: left;
+      }
+      .social .chev {
+        color: var(--muted);
+        font-size: 11px;
         transition:
-          transform 0.3s ease,
-          background 0.3s ease,
-          color 0.3s ease;
+          transform 0.2s ease,
+          color 0.2s ease;
       }
-      .link:hover .chev {
+      .social:hover .chev {
+        color: var(--accent);
         transform: translateX(-3px);
-        background: var(--navy);
-        color: var(--white);
-      }
-      .chev i {
-        font-size: 10px;
       }
 
-      footer {
-        margin-top: 16px;
-        text-align: center;
+      /* ===== Brand colors ===== */
+      .em .icon {
+        background: linear-gradient(135deg, #4f9eff, #2b5fb3);
+        box-shadow: 0 4px 14px -4px rgba(79, 158, 255, 0.5);
       }
-      footer p {
-        font-family: "Inter", sans-serif;
-        font-size: 11px;
-        font-weight: 500;
-        letter-spacing: 0.06em;
+      .wa .icon {
+        background: linear-gradient(135deg, #25d366, #128c4a);
+        box-shadow: 0 4px 14px -4px rgba(37, 211, 102, 0.5);
+      }
+      .fb .icon {
+        background: linear-gradient(135deg, #1877f2, #0e4da8);
+        box-shadow: 0 4px 14px -4px rgba(24, 119, 242, 0.5);
+      }
+      .yt .icon {
+        background: linear-gradient(135deg, #ff0000, #b30000);
+        box-shadow: 0 4px 14px -4px rgba(255, 0, 0, 0.45);
+      }
+      .ig .icon {
+        background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+        box-shadow: 0 4px 14px -4px rgba(220, 39, 67, 0.5);
+      }
+      .tt .icon {
+        background: #000;
+        box-shadow:
+          -2px 2px 10px -2px rgba(37, 244, 238, 0.5),
+          2px -2px 10px -2px rgba(254, 44, 85, 0.5);
+      }
+      .tt .icon i {
+        text-shadow:
+          1.5px 0 0 #25f4ee,
+          -1.5px 0 0 #fe2c55;
+      }
+
+      /* ===== Footer ===== */
+      footer {
+        margin-top: auto;
+        padding-top: 24px;
+        text-align: center;
+        font-size: 10.5px;
+        letter-spacing: 0.08em;
         color: var(--muted);
       }
 
-      @media (max-height: 700px) {
-        .phone {
-          padding-top: calc(12px + var(--safe-t));
+      @media (max-width: 360px) {
+        .cards {
+          grid-template-columns: 1fr;
         }
-        .logo {
+      }
+
+      @media (max-height: 700px) {
+        .avatar-ring {
           width: 88px;
           height: 88px;
-          margin-bottom: 8px;
-          border-radius: 22px;
         }
         h1 {
-          font-size: 16px;
+          font-size: 19px;
         }
         .quote,
         .phone-num {
           display: none;
-        }
-        .link {
-          min-height: 52px;
         }
       }
 
@@ -682,78 +528,65 @@
         *::before,
         *::after {
           animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
           transition-duration: 0.01ms !important;
         }
       }
     </style>
   </head>
   <body>
-    <div class="orbs" aria-hidden="true">
-      <span class="orb o1"></span>
-      <span class="orb o2"></span>
-      <span class="orb o3"></span>
-    </div>
-
-    <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
-    <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
-
     <main class="phone">
-      <header class="brand">
-        <div class="logo reveal d1">
+      <!-- Hero -->
+      <header class="hero r r1">
+        <div class="avatar-ring">
           <img src="347A4321.JPG.webp" alt="خیام نبی زاده" />
         </div>
-        <h1 class="reveal d2">خیام نبی زاده</h1>
-        <p class="en reveal d2">Khiam Nabizada</p>
-        <div class="rule reveal d3"></div>
-        <p class="quote reveal d3">ارتباط، اعتماد، همراهی.</p>
+        <h1>خیام نبی زاده</h1>
+        <p class="en">Khiam Nabizada</p>
+        <p class="quote">ارتباط، اعتماد، همراهی.</p>
       </header>
 
-      <!-- دکمه‌های اصلی: تماس + ذخیره مخاطب -->
-      <div class="actions reveal d4">
-        <a class="btn btn-blue" href="tel:+93786131213">
+      <!-- Actions -->
+      <div class="actions r r2">
+        <a class="btn btn-primary" href="tel:+93786131213">
           <i class="fa-solid fa-phone"></i>
           <span>تماس</span>
         </a>
-        <button type="button" id="saveContactBtn" class="btn btn-save">
+        <button type="button" id="saveContactBtn" class="btn btn-ghost">
           <i class="fa-solid fa-address-card"></i>
           <span id="saveContactLabel">ذخیره مخاطب</span>
         </button>
       </div>
-      <p class="phone-num reveal d5">078 613 1213</p>
+      <p class="phone-num r r3">078 613 1213</p>
 
-      <!-- اطلاعات تماس: ایمیل + واتساپ (هر کدام یک بار) -->
-      <p class="section-title reveal d5">اطلاعات تماس</p>
-      <nav class="links">
-        <a class="link em reveal d5" href="mailto:tdp.ahmadkhiam@gmail.com">
+      <!-- Contact -->
+      <p class="section-label r r3">اطلاعات تماس</p>
+      <div class="cards r r4">
+        <a class="card em" href="mailto:tdp.ahmadkhiam@gmail.com">
           <div class="icon"><i class="fa-solid fa-envelope"></i></div>
-          <div class="meta">
+          <div>
             <strong>ایمیل</strong>
-            <small class="handle">tdp.ahmadkhiam@gmail.com</small>
+            <small>tdp.ahmadkhiam@gmail.com</small>
           </div>
-          <div class="chev"><i class="fa-solid fa-chevron-left"></i></div>
         </a>
-
         <a
-          class="link wa reveal d6"
+          class="card wa"
           href="https://wa.me/93786131213"
           target="_blank"
           rel="noopener"
         >
           <div class="icon"><i class="fa-brands fa-whatsapp"></i></div>
-          <div class="meta">
+          <div>
             <strong>واتساپ</strong>
             <small>پیام مستقیم</small>
           </div>
-          <div class="chev"><i class="fa-solid fa-chevron-left"></i></div>
         </a>
-      </nav>
+      </div>
 
-      <!-- شبکه‌های اجتماعی: هر کدام یک بار -->
-      <p class="section-title reveal d6">شبکه‌های اجتماعی</p>
-      <nav class="links">
+      <!-- Social -->
+      <p class="section-label r r5">شبکه‌های اجتماعی</p>
+      <div class="social-list r r5">
         <a
-          class="link ig reveal d6"
+          class="social ig"
           href="https://www.instagram.com/khiamnabizada?mdxt=a2lxc25pZWlzNHEw&amp;utm_source=qr"
           target="_blank"
           rel="noopener"
@@ -761,14 +594,13 @@
           <div class="icon"><i class="fa-brands fa-instagram"></i></div>
           <div class="meta">
             <strong>اینستاگرام</strong>
-            <small class="handle">@khiamnabizada</small>
+            <small>@khiamnabizada</small>
           </div>
-          <div class="chev"><i class="fa-solid fa-chevron-left"></i></div>
+          <i class="fa-solid fa-chevron-left chev"></i>
         </a>
-
         <a
-          class="link fb reveal d7"
-          href="https://www.facebook.com/ahmadkhiam.nabizadanabizada?mibextid=wwXIfr&amp;mibextid=wwXIfr"
+          class="social fb"
+          href="https://www.facebook.com/ahmadkhiam.nabizadanabizada?mibextid=wwXIfr"
           target="_blank"
           rel="noopener"
         >
@@ -777,11 +609,23 @@
             <strong>فیسبوک</strong>
             <small>Ahmad Khiam Nabizada</small>
           </div>
-          <div class="chev"><i class="fa-solid fa-chevron-left"></i></div>
+          <i class="fa-solid fa-chevron-left chev"></i>
         </a>
-
         <a
-          class="link yt reveal d7"
+          class="social tt"
+          href="https://www.tiktok.com/@khiam.nabizada?_r=1&_t=ZP-9BEXMGjxGSV"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="icon"><i class="fa-brands fa-tiktok"></i></div>
+          <div class="meta">
+            <strong>تیک‌تاک</strong>
+            <small>@khiam.nabizada</small>
+          </div>
+          <i class="fa-solid fa-chevron-left chev"></i>
+        </a>
+        <a
+          class="social yt"
           href="https://youtube.com/@laughstore?si=yanjar9bNgd7PKH2"
           target="_blank"
           rel="noopener"
@@ -789,13 +633,13 @@
           <div class="icon"><i class="fa-brands fa-youtube"></i></div>
           <div class="meta">
             <strong>یوتیوب</strong>
-            <small class="handle">@laughstore</small>
+            <small>@laughstore</small>
           </div>
-          <div class="chev"><i class="fa-solid fa-chevron-left"></i></div>
+          <i class="fa-solid fa-chevron-left chev"></i>
         </a>
-      </nav>
+      </div>
 
-      <footer class="reveal d8">
+      <footer class="r r6">
         <p dir="ltr">© 2026 · Khiam Nabizada</p>
       </footer>
     </main>
@@ -811,6 +655,7 @@
         facebook: "https://www.facebook.com/ahmadkhiam.nabizadanabizada",
         youtube: "https://youtube.com/@laughstore",
         whatsapp: "https://wa.me/93786131213",
+        tiktok: "https://www.tiktok.com/@khiam.nabizada",
       };
 
       function buildVCard() {
@@ -823,6 +668,7 @@
           "EMAIL;TYPE=INTERNET:" + CONTACT.email,
           "URL:" + CONTACT.instagram,
           "URL:" + CONTACT.facebook,
+          "URL:" + CONTACT.tiktok,
           "URL:" + CONTACT.youtube,
           "URL:" + CONTACT.whatsapp,
           "END:VCARD",
@@ -834,7 +680,6 @@
         const fileName = "Khiam-Nabizada.vcf";
         const btn = document.getElementById("saveContactBtn");
         const label = document.getElementById("saveContactLabel");
-
         const ua = navigator.userAgent || "";
         const isIOS =
           /iPad|iPhone|iPod/.test(ua) ||
@@ -854,7 +699,7 @@
             await navigator.share({
               files: [file],
               title: CONTACT.fullName,
-              text: "ذخیره در مخاطبین / Save to Contacts",
+              text: "ذخیره در مخاطبین",
             });
             return;
           } catch (err) {
@@ -878,78 +723,14 @@
           setTimeout(() => {
             btn.classList.remove("saved");
             label.textContent = original;
-          }, 3000);
+          }, 2500);
         }
-
         setTimeout(() => URL.revokeObjectURL(url), 2000);
       }
 
       document
         .getElementById("saveContactBtn")
         .addEventListener("click", saveContact);
-
-      (function () {
-        const dot = document.getElementById("cursorDot");
-        const ring = document.getElementById("cursorRing");
-
-        const isTouch =
-          navigator.maxTouchPoints > 0 ||
-          "ontouchstart" in window ||
-          window.matchMedia("(pointer: coarse)").matches;
-
-        const hasFinePointer = window.matchMedia(
-          "(hover: hover) and (pointer: fine)",
-        ).matches;
-
-        if (isTouch || !hasFinePointer) {
-          dot.style.display = "none";
-          ring.style.display = "none";
-          return;
-        }
-
-        let mx = window.innerWidth / 2;
-        let my = window.innerHeight / 2;
-        let rx = mx,
-          ry = my;
-
-        document.addEventListener("mousemove", function (e) {
-          if (!document.body.classList.contains("custom-cursor")) {
-            document.body.classList.add("custom-cursor");
-          }
-          mx = e.clientX;
-          my = e.clientY;
-          dot.style.transform =
-            "translate(" + mx + "px, " + my + "px) translate(-50%, -50%)";
-        });
-
-        (function animateRing() {
-          rx += (mx - rx) * 0.18;
-          ry += (my - ry) * 0.18;
-          ring.style.transform =
-            "translate(" + rx + "px, " + ry + "px) translate(-50%, -50%)";
-          requestAnimationFrame(animateRing);
-        })();
-
-        document
-          .querySelectorAll("a, button, .btn, .link, .logo")
-          .forEach(function (el) {
-            el.addEventListener("mouseenter", function () {
-              document.body.classList.add("cursor-hover");
-            });
-            el.addEventListener("mouseleave", function () {
-              document.body.classList.remove("cursor-hover");
-            });
-          });
-
-        document.addEventListener("mouseleave", function () {
-          dot.style.opacity = "0";
-          ring.style.opacity = "0";
-        });
-        document.addEventListener("mouseenter", function () {
-          dot.style.opacity = "1";
-          ring.style.opacity = "1";
-        });
-      })();
     </script>
   </body>
 </html>

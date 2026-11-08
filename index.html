@@ -6,12 +6,8 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <meta name="theme-color" content="#0a2540" />
+    <meta name="theme-color" content="#fafafa" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
     <meta name="description" content="خیام نبی زاده — ارتباط، اعتماد، همراهی" />
     <title>خیام نبی زاده</title>
 
@@ -20,25 +16,26 @@
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --bg: #0a1628;
-        --bg2: #0f1f38;
-        --card: rgba(255, 255, 255, 0.05);
-        --card-hover: rgba(255, 255, 255, 0.09);
-        --border: rgba(255, 255, 255, 0.1);
-        --accent: #4f9eff;
-        --accent2: #6ee7ff;
-        --gold: #f5b942;
-        --text: #f0f6ff;
-        --muted: rgba(240, 246, 255, 0.55);
+        --bg: #fafafa;
+        --surface: #ffffff;
+        --surface-2: #f4f4f5;
+        --text: #18181b;
+        --text-2: #52525b;
+        --text-3: #a1a1aa;
+        --border: #e4e4e7;
+        --border-strong: #d4d4d8;
+        --accent: #18181b;
         --wa: #25d366;
         --fb: #1877f2;
         --yt: #ff0000;
-        --radius: 18px;
+        --radius-lg: 20px;
+        --radius-md: 14px;
+        --radius-sm: 10px;
         --safe-t: env(safe-area-inset-top, 0px);
         --safe-b: env(safe-area-inset-bottom, 0px);
       }
@@ -50,90 +47,58 @@
         padding: 0;
       }
 
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+
       body {
-        font-family: "Vazirmatn", sans-serif;
+        font-family:
+          "Vazirmatn",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
         color: var(--text);
         background: var(--bg);
         min-height: 100dvh;
         display: flex;
         justify-content: center;
         overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
 
-      .phone {
+      .app {
         width: 100%;
-        max-width: 430px;
+        max-width: 440px;
         min-height: 100dvh;
-        position: relative;
-        background:
-          radial-gradient(
-            ellipse 120% 60% at 50% -10%,
-            rgba(79, 158, 255, 0.18),
-            transparent 60%
-          ),
-          radial-gradient(
-            ellipse 80% 50% at 80% 110%,
-            rgba(110, 231, 255, 0.08),
-            transparent 60%
-          ),
-          var(--bg);
         display: flex;
         flex-direction: column;
-        padding: calc(20px + var(--safe-t)) 18px calc(16px + var(--safe-b));
-        overflow: hidden;
-      }
-
-      /* ===== Animated grid lines background ===== */
-      .phone::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background-image:
-          linear-gradient(rgba(79, 158, 255, 0.05) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(79, 158, 255, 0.05) 1px, transparent 1px);
-        background-size: 40px 40px;
-        mask-image: radial-gradient(
-          ellipse 80% 60% at 50% 30%,
-          black,
-          transparent 80%
-        );
-        -webkit-mask-image: radial-gradient(
-          ellipse 80% 60% at 50% 30%,
-          black,
-          transparent 80%
-        );
-        pointer-events: none;
-        z-index: 0;
-      }
-
-      .phone > * {
-        position: relative;
-        z-index: 1;
+        padding: calc(24px + var(--safe-t)) 20px calc(20px + var(--safe-b));
       }
 
       /* ===== Reveal ===== */
       .r {
         opacity: 0;
-        transform: translateY(12px);
-        animation: up 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        transform: translateY(8px);
+        animation: up 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
       }
       .r1 {
-        animation-delay: 0.05s;
+        animation-delay: 0.04s;
       }
       .r2 {
-        animation-delay: 0.12s;
+        animation-delay: 0.1s;
       }
       .r3 {
-        animation-delay: 0.19s;
+        animation-delay: 0.16s;
       }
       .r4 {
-        animation-delay: 0.26s;
+        animation-delay: 0.22s;
       }
       .r5 {
-        animation-delay: 0.33s;
+        animation-delay: 0.28s;
       }
       .r6 {
-        animation-delay: 0.4s;
+        animation-delay: 0.34s;
       }
       @keyframes up {
         to {
@@ -148,378 +113,318 @@
         flex-direction: column;
         align-items: center;
         text-align: center;
-        padding: 8px 0 4px;
+        padding: 8px 0 0;
       }
 
-      .avatar-ring {
-        position: relative;
-        width: 108px;
-        height: 108px;
-        margin-bottom: 14px;
-      }
-      .avatar-ring::before {
-        content: "";
-        position: absolute;
-        inset: -6px;
+      .avatar {
+        width: 96px;
+        height: 96px;
         border-radius: 50%;
-        background: conic-gradient(
-          from 0deg,
-          var(--accent),
-          var(--accent2),
-          var(--gold),
-          var(--accent)
-        );
-        animation: spin 6s linear infinite;
-        z-index: 0;
+        overflow: hidden;
+        border: 1px solid var(--border-strong);
+        background: var(--surface-2);
+        margin-bottom: 16px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
       }
-      .avatar-ring::after {
-        content: "";
-        position: absolute;
-        inset: -3px;
-        border-radius: 50%;
-        background: var(--bg);
-        z-index: 1;
-      }
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-      .avatar-ring img {
-        position: relative;
-        z-index: 2;
+      .avatar img {
         width: 100%;
         height: 100%;
-        border-radius: 50%;
         object-fit: cover;
         display: block;
-        border: 3px solid var(--bg);
       }
 
       h1 {
-        font-size: 22px;
-        font-weight: 800;
-        letter-spacing: -0.02em;
-        background: linear-gradient(135deg, #fff 30%, var(--accent2));
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
         line-height: 1.3;
+        color: var(--text);
       }
       .en {
         margin-top: 4px;
-        font-size: 10.5px;
-        font-weight: 600;
-        letter-spacing: 0.28em;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
-        color: var(--muted);
+        color: var(--text-3);
       }
-
       .quote {
-        margin-top: 12px;
-        font-size: 12.5px;
-        color: var(--muted);
-        padding: 6px 16px;
-        border: 1px solid var(--border);
-        border-radius: 99px;
-        background: var(--card);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        margin-top: 14px;
+        font-size: 13px;
+        color: var(--text-2);
+        line-height: 1.6;
       }
 
-      /* ===== Action buttons ===== */
+      /* ===== Actions ===== */
       .actions {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
-        margin-top: 20px;
+        margin-top: 24px;
       }
       .btn {
-        height: 52px;
+        height: 50px;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
-        border-radius: 14px;
+        border-radius: var(--radius-md);
         font:
-          700 14px "Vazirmatn",
+          600 14px "Vazirmatn",
           sans-serif;
-        border: none;
+        border: 1px solid transparent;
         cursor: pointer;
         transition:
-          transform 0.15s ease,
-          box-shadow 0.2s ease;
+          background 0.15s ease,
+          border-color 0.15s ease,
+          transform 0.1s ease;
         text-decoration: none;
-        position: relative;
-        overflow: hidden;
+        -webkit-user-select: none;
+        user-select: none;
       }
       .btn:active {
-        transform: scale(0.96);
+        transform: scale(0.97);
+      }
+      .btn i {
+        font-size: 13px;
       }
       .btn-primary {
-        background: linear-gradient(135deg, var(--accent), #3d7dd6);
+        background: var(--accent);
         color: #fff;
-        box-shadow: 0 8px 24px -8px rgba(79, 158, 255, 0.6);
       }
       .btn-primary:hover {
-        box-shadow: 0 12px 28px -8px rgba(79, 158, 255, 0.8);
+        background: #2a2a2a;
       }
-      .btn-ghost {
-        background: var(--card);
+      .btn-secondary {
+        background: var(--surface);
         color: var(--text);
-        border: 1px solid var(--border);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        border-color: var(--border-strong);
       }
-      .btn-ghost:hover {
-        background: var(--card-hover);
-        border-color: rgba(79, 158, 255, 0.4);
+      .btn-secondary:hover {
+        background: var(--surface-2);
+        border-color: var(--text-3);
       }
-      .btn-ghost.saved {
-        background: rgba(37, 211, 102, 0.15);
+      .btn-secondary.saved {
+        background: #f0fdf4;
         border-color: var(--wa);
-        color: #7dffa8;
+        color: #15803d;
       }
 
-      .phone-num {
-        margin-top: 10px;
+      .phone {
+        margin-top: 12px;
         text-align: center;
-        font-size: 12px;
+        font-size: 12.5px;
         font-weight: 500;
-        letter-spacing: 0.1em;
-        color: var(--muted);
+        letter-spacing: 0.06em;
+        color: var(--text-3);
         direction: ltr;
       }
 
       /* ===== Section label ===== */
-      .section-label {
-        margin: 22px 0 10px;
+      .label {
+        margin: 28px 0 10px;
         font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.15em;
+        font-weight: 600;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: var(--muted);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .section-label::after {
-        content: "";
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(90deg, var(--border), transparent);
+        color: var(--text-3);
+        padding-inline-start: 2px;
       }
 
-      /* ===== Cards grid ===== */
-      .cards {
+      /* ===== Contact cards ===== */
+      .grid-2 {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
       }
-
-      .card {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        padding: 16px;
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        text-decoration: none;
-        color: inherit;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        transition:
-          transform 0.2s ease,
-          background 0.2s ease,
-          border-color 0.2s ease;
-        position: relative;
-        overflow: hidden;
-      }
-      .card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 60px;
-        height: 60px;
-        background: radial-gradient(
-          circle,
-          rgba(79, 158, 255, 0.15),
-          transparent 70%
-        );
-        pointer-events: none;
-      }
-      .card:hover {
-        transform: translateY(-3px);
-        background: var(--card-hover);
-        border-color: rgba(79, 158, 255, 0.35);
-      }
-      .card:active {
-        transform: scale(0.98);
-      }
-      .card .icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
-        display: grid;
-        place-items: center;
-        font-size: 18px;
-        color: #fff;
-        position: relative;
-        z-index: 1;
-      }
-      .card strong {
-        display: block;
-        font-size: 13.5px;
-        font-weight: 700;
-        margin-bottom: 3px;
-      }
-      .card small {
-        display: block;
-        font-size: 11px;
-        color: var(--muted);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        direction: ltr;
-        text-align: left;
-        font-family: "Vazirmatn", sans-serif;
-      }
-
-      /* ===== Social rows ===== */
-      .social-list {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-      .social {
+      .tile {
         display: flex;
         align-items: center;
-        gap: 14px;
-        padding: 12px 14px;
-        background: var(--card);
+        gap: 12px;
+        padding: 14px;
+        background: var(--surface);
         border: 1px solid var(--border);
-        border-radius: 14px;
+        border-radius: var(--radius-md);
         text-decoration: none;
         color: inherit;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
         transition:
-          transform 0.2s ease,
-          background 0.2s ease,
-          border-color 0.2s ease;
+          border-color 0.15s ease,
+          transform 0.1s ease;
+        min-width: 0;
       }
-      .social:hover {
-        transform: translateX(-4px);
-        background: var(--card-hover);
-        border-color: rgba(79, 158, 255, 0.35);
+      .tile:hover {
+        border-color: var(--border-strong);
       }
-      .social:active {
+      .tile:active {
         transform: scale(0.98);
       }
-      .social .icon {
-        width: 38px;
-        height: 38px;
-        border-radius: 11px;
+      .tile .ic {
+        width: 36px;
+        height: 36px;
+        border-radius: var(--radius-sm);
         display: grid;
         place-items: center;
         flex-shrink: 0;
-        font-size: 17px;
+        font-size: 16px;
         color: #fff;
       }
-      .social .meta {
+      .tile .info {
+        min-width: 0;
+        flex: 1;
+      }
+      .tile strong {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 2px;
+      }
+      .tile small {
+        display: block;
+        font-size: 11px;
+        color: var(--text-3);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .tile small.ltr {
+        direction: ltr;
+        text-align: left;
+      }
+
+      /* ===== Social list ===== */
+      .list {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 13px 16px;
+        text-decoration: none;
+        color: inherit;
+        transition: background 0.15s ease;
+        position: relative;
+      }
+      .row + .row {
+        border-top: 1px solid var(--border);
+      }
+      .row:hover {
+        background: var(--surface-2);
+      }
+      .row:active {
+        background: var(--surface-2);
+      }
+      .row .ic {
+        width: 32px;
+        height: 32px;
+        border-radius: var(--radius-sm);
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        font-size: 15px;
+        color: #fff;
+      }
+      .row .info {
         flex: 1;
         min-width: 0;
       }
-      .social strong {
+      .row strong {
         display: block;
-        font-size: 13px;
-        font-weight: 700;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: var(--text);
       }
-      .social small {
+      .row small {
         display: block;
-        margin-top: 2px;
-        font-size: 10.5px;
-        color: var(--muted);
+        margin-top: 1px;
+        font-size: 11.5px;
+        color: var(--text-3);
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         direction: ltr;
         text-align: left;
       }
-      .social .chev {
-        color: var(--muted);
-        font-size: 11px;
+      .row .chev {
+        color: var(--text-3);
+        font-size: 10px;
+        flex-shrink: 0;
         transition:
-          transform 0.2s ease,
-          color 0.2s ease;
+          transform 0.15s ease,
+          color 0.15s ease;
       }
-      .social:hover .chev {
-        color: var(--accent);
-        transform: translateX(-3px);
+      .row:hover .chev {
+        color: var(--text);
+        transform: translateX(-2px);
       }
 
-      /* ===== Brand colors ===== */
-      .em .icon {
-        background: linear-gradient(135deg, #4f9eff, #2b5fb3);
-        box-shadow: 0 4px 14px -4px rgba(79, 158, 255, 0.5);
+      /* ===== Brand colors (minimal) ===== */
+      .ic.wa {
+        background: var(--wa);
       }
-      .wa .icon {
-        background: linear-gradient(135deg, #25d366, #128c4a);
-        box-shadow: 0 4px 14px -4px rgba(37, 211, 102, 0.5);
+      .ic.fb {
+        background: var(--fb);
       }
-      .fb .icon {
-        background: linear-gradient(135deg, #1877f2, #0e4da8);
-        box-shadow: 0 4px 14px -4px rgba(24, 119, 242, 0.5);
+      .ic.yt {
+        background: var(--yt);
       }
-      .yt .icon {
-        background: linear-gradient(135deg, #ff0000, #b30000);
-        box-shadow: 0 4px 14px -4px rgba(255, 0, 0, 0.45);
+      .ic.ig {
+        background: linear-gradient(
+          135deg,
+          #f09433 0%,
+          #e6683c 25%,
+          #dc2743 50%,
+          #cc2366 75%,
+          #bc1888 100%
+        );
       }
-      .ig .icon {
-        background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
-        box-shadow: 0 4px 14px -4px rgba(220, 39, 67, 0.5);
-      }
-      .tt .icon {
+      .ic.tt {
         background: #000;
-        box-shadow:
-          -2px 2px 10px -2px rgba(37, 244, 238, 0.5),
-          2px -2px 10px -2px rgba(254, 44, 85, 0.5);
       }
-      .tt .icon i {
+      .ic.tt i {
         text-shadow:
-          1.5px 0 0 #25f4ee,
-          -1.5px 0 0 #fe2c55;
+          1px 0 0 #25f4ee,
+          -1px 0 0 #fe2c55;
+      }
+      .ic.em {
+        background: var(--accent);
       }
 
       /* ===== Footer ===== */
       footer {
         margin-top: auto;
-        padding-top: 24px;
+        padding-top: 28px;
         text-align: center;
-        font-size: 10.5px;
-        letter-spacing: 0.08em;
-        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        color: var(--text-3);
       }
 
+      /* ===== Responsive ===== */
       @media (max-width: 360px) {
-        .cards {
+        .app {
+          padding-inline: 16px;
+        }
+        .grid-2 {
           grid-template-columns: 1fr;
         }
       }
 
       @media (max-height: 700px) {
-        .avatar-ring {
-          width: 88px;
-          height: 88px;
+        .avatar {
+          width: 80px;
+          height: 80px;
+          margin-bottom: 12px;
         }
-        h1 {
-          font-size: 19px;
-        }
-        .quote,
-        .phone-num {
+        .quote {
           display: none;
+        }
+        .label {
+          margin-top: 20px;
         }
       }
 
@@ -534,10 +439,10 @@
     </style>
   </head>
   <body>
-    <main class="phone">
+    <main class="app">
       <!-- Hero -->
       <header class="hero r r1">
-        <div class="avatar-ring">
+        <div class="avatar">
           <img src="347A4321.JPG.webp" alt="خیام نبی زاده" />
         </div>
         <h1>خیام نبی زاده</h1>
@@ -551,31 +456,31 @@
           <i class="fa-solid fa-phone"></i>
           <span>تماس</span>
         </a>
-        <button type="button" id="saveContactBtn" class="btn btn-ghost">
+        <button type="button" id="saveContactBtn" class="btn btn-secondary">
           <i class="fa-solid fa-address-card"></i>
           <span id="saveContactLabel">ذخیره مخاطب</span>
         </button>
       </div>
-      <p class="phone-num r r3">078 613 1213</p>
+      <p class="phone r r3">078 613 1213</p>
 
       <!-- Contact -->
-      <p class="section-label r r3">اطلاعات تماس</p>
-      <div class="cards r r4">
-        <a class="card em" href="mailto:tdp.ahmadkhiam@gmail.com">
-          <div class="icon"><i class="fa-solid fa-envelope"></i></div>
-          <div>
+      <p class="label r r3">اطلاعات تماس</p>
+      <div class="grid-2 r r4">
+        <a class="tile" href="mailto:tdp.ahmadkhiam@gmail.com">
+          <div class="ic em"><i class="fa-solid fa-envelope"></i></div>
+          <div class="info">
             <strong>ایمیل</strong>
-            <small>tdp.ahmadkhiam@gmail.com</small>
+            <small class="ltr">tdp.ahmadkhiam@gmail.com</small>
           </div>
         </a>
         <a
-          class="card wa"
+          class="tile"
           href="https://wa.me/93786131213"
           target="_blank"
           rel="noopener"
         >
-          <div class="icon"><i class="fa-brands fa-whatsapp"></i></div>
-          <div>
+          <div class="ic wa"><i class="fa-brands fa-whatsapp"></i></div>
+          <div class="info">
             <strong>واتساپ</strong>
             <small>پیام مستقیم</small>
           </div>
@@ -583,55 +488,55 @@
       </div>
 
       <!-- Social -->
-      <p class="section-label r r5">شبکه‌های اجتماعی</p>
-      <div class="social-list r r5">
+      <p class="label r r5">شبکه‌های اجتماعی</p>
+      <div class="list r r5">
         <a
-          class="social ig"
+          class="row"
           href="https://www.instagram.com/khiamnabizada?mdxt=a2lxc25pZWlzNHEw&amp;utm_source=qr"
           target="_blank"
           rel="noopener"
         >
-          <div class="icon"><i class="fa-brands fa-instagram"></i></div>
-          <div class="meta">
+          <div class="ic ig"><i class="fa-brands fa-instagram"></i></div>
+          <div class="info">
             <strong>اینستاگرام</strong>
             <small>@khiamnabizada</small>
           </div>
           <i class="fa-solid fa-chevron-left chev"></i>
         </a>
         <a
-          class="social fb"
+          class="row"
           href="https://www.facebook.com/ahmadkhiam.nabizadanabizada?mibextid=wwXIfr"
           target="_blank"
           rel="noopener"
         >
-          <div class="icon"><i class="fa-brands fa-facebook-f"></i></div>
-          <div class="meta">
+          <div class="ic fb"><i class="fa-brands fa-facebook-f"></i></div>
+          <div class="info">
             <strong>فیسبوک</strong>
             <small>Ahmad Khiam Nabizada</small>
           </div>
           <i class="fa-solid fa-chevron-left chev"></i>
         </a>
         <a
-          class="social tt"
+          class="row"
           href="https://www.tiktok.com/@khiam.nabizada?_r=1&_t=ZP-9BEXMGjxGSV"
           target="_blank"
           rel="noopener"
         >
-          <div class="icon"><i class="fa-brands fa-tiktok"></i></div>
-          <div class="meta">
+          <div class="ic tt"><i class="fa-brands fa-tiktok"></i></div>
+          <div class="info">
             <strong>تیک‌تاک</strong>
             <small>@khiam.nabizada</small>
           </div>
           <i class="fa-solid fa-chevron-left chev"></i>
         </a>
         <a
-          class="social yt"
+          class="row"
           href="https://youtube.com/@laughstore?si=yanjar9bNgd7PKH2"
           target="_blank"
           rel="noopener"
         >
-          <div class="icon"><i class="fa-brands fa-youtube"></i></div>
-          <div class="meta">
+          <div class="ic yt"><i class="fa-brands fa-youtube"></i></div>
+          <div class="info">
             <strong>یوتیوب</strong>
             <small>@laughstore</small>
           </div>
@@ -719,7 +624,7 @@
         if (btn && label) {
           const original = label.textContent;
           btn.classList.add("saved");
-          label.textContent = "دانلود شد ✓";
+          label.textContent = "دانلود شد";
           setTimeout(() => {
             btn.classList.remove("saved");
             label.textContent = original;
